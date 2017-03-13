@@ -1,0 +1,37 @@
+html {
+	font-family: Roboto;
+}
+
+#container {
+	background-color: white;
+	width: 800px;
+	margin-right: auto;
+	margin-left: auto;
+}
+#hr{
+	border: none;
+	border-bottom: 1px solid #cfcfcf;
+	margin-top: 30px
+}
+
+header {
+	background-color: #cce27f;
+	padding: 10px;
+	color: white;
+	text-align: left;
+	border: 2px solid #d9ee91;
+}
+header h1 {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 60px;
+}
+header hr { border:none; border-bottom: 2px solid white; }
+
+#rectangle {
+	width: 760px;
+	height: 10px;	
+	background: #e0e0e0;
+	position: relative;
+	left: 20px
+}
