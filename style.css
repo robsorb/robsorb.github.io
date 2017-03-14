@@ -2,16 +2,43 @@ html {
 	font-family: Roboto;
 }
 
-#container {
-	background-color: white;
+body {
 	width: 800px;
 	margin-right: auto;
 	margin-left: auto;
+	background-color: white;
 }
+a:link {
+	color: #5c5c5c;
+	text-decoration: none;
+	font-weight: bold;
+}
+a:visited {
+	color: #8f8f8f;
+}
+a:hover {
+	color: #4d4d4d;
+	text-decoration: underline;
+}
+#technasium {
+	padding: 0 20px;
+	border: 1px solid #e0e0e0;
+	margin-bottom: 30px;
+}
+#physics {
+	padding: 0 20px;
+	border: 1px solid #e0e0e0;
+	margin-bottom: 30px;
+}
+img {
+	width: 600px;
+}
+
 #hr{
 	border: none;
 	border-bottom: 1px solid #cfcfcf;
-	margin-top: 30px
+	margin-top: 30px;
+	margin-bottom: 20px;
 }
 
 header {
@@ -20,18 +47,30 @@ header {
 	color: white;
 	text-align: left;
 	border: 2px solid #d9ee91;
+	position: relative
 }
 header h1 {
 	margin-top: 5px;
 	margin-bottom: 5px;
 	margin-left: 60px;
 }
-header hr { border:none; border-bottom: 2px solid white; }
+header hr { 
+	border:none;
+	margin-top: 10px;
+	border-bottom: 2px solid white;
+}
 
-#rectangle {
+header:after {
+	content: '';
+	display: block;
 	width: 760px;
 	height: 10px;	
 	background: #e0e0e0;
-	position: relative;
-	left: 20px
+	position: absolute;
+	left: 20px;
+	top: 100%;
+}
+
+main {
+	padding: 0px 0px;
 }
