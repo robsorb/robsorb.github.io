@@ -20,19 +20,12 @@ a:hover {
 	color: #4d4d4d;
 	text-decoration: underline;
 }
-#technasium {
+article > section {
 	padding: 0 20px;
 	border: 1px solid #e0e0e0;
 	margin-bottom: 30px;
 }
-#physics {
-	padding: 0 20px;
-	border: 1px solid #e0e0e0;
-	margin-bottom: 30px;
-}
-img {
-	width: 600px;
-}
+
 
 #hr{
 	border: none;
@@ -59,7 +52,10 @@ header hr {
 	margin-top: 10px;
 	border-bottom: 2px solid white;
 }
-
+figure {
+	margin-left: 0;
+	margin-right: 0;
+}
 header:after {
 	content: '';
 	display: block;
