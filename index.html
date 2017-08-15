@@ -1,71 +1,124 @@
-<!DOCTYPE HTML> 
+<!DOCTYPE HTML>
 
 <html>
 	<head>
-		<title> Rob Schellingerhout</title>
+		<title> Rob Schellingerhout </title>
 		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
 		<link href="style.css" rel="stylesheet" type="text/css" />
-		<link rel="stylesheet" href="photoswipe.css">
-		<link rel="stylesheet" href="default-skin/default-skin.css"> 
-		<script src="photoswipe.min.js"></script> 
-		<script src="photoswipe-ui-default.min.js"></script>
-	
+
+		<script type="text/javascript" src="jquerry.js"></script>
+
+		<script type="text/javascript" src="parallax.js"></script>
+		<script type="text/javascript" src="animation.js"></script>
+		<script type="text/javascript" src="gui.js"></script>
+
+		<script type="text/javascript" src="script.js"></script>
 	</head>
 
 	<body>
 		<header>
-			<h1> Rob Schellingerhout </h1>
-			<hr>
+			<div class="parallax" id="head_parallax">
+				<img src="img/header/header_bg.png" class="parallax_element" distance=0 startHeight=0.45>
+				<img src="img/header/header_terrain5.png" class="parallax_element" distance=0.1 startHeight=0.4>
+				<img src="img/header/header_terrain4.png" class="parallax_element" distance=0.2 startHeight=0.35>
+				<img src="img/header/header_terrain3.png" class="parallax_element" distance=0.3 startHeight=0.3>
+				<img src="img/header/header_terrain2.png" class="parallax_element" distance=0.4 startHeight=0.25>
+
+				<h1 class="parallax_element" distance=0.2 startHeight=0.9> Rob Schellingerhout </h1>
+
+				<img src="img/header/header_terrain1.png" class="parallax_element" distance=0.5 startHeight=0.2>
+				<img src="img/header/header_reflection.png" class="parallax_element" distance=0.5 startHeight=0.2>
+				<img src="img/header/header_birds.png" class="parallax_element" distance=0.6 startHeight=0.3>
+				<img src="img/header/header_fg.png" class="parallax_element" distance=1>
+
+
+
+			</div>
+
+			<!--<div id=navigation> <img src="img/gui/nav.png" onclick="navigation.onclick()" > </div>-->
+
 		</header>
-		<hr id="hr">
 
 		<main>
-			<article>
-				<section id="technasium">
-					<h2> Technasium </h2>
-					<p> <a href="https://www.technasium.nl/">Technasium</a> is a Dutch programme to introduce students from the age 13-18 to both technical studies and trade and industry, by facilitating students to search for projects at real-life companies, and to actually completing these projects. </p>
-					<section> 
-						<h3> Office of the future </h3>
-						<p> The Dutch construction company <a href="https://heijmans.nl/">Heijmans</a> decided to host a competition to design the office of the future. Our team ended up winning this competition and getting a chance to present our idea in the <a href="https://www.nmm.nl/">National Military Museum</a> in Soesterberg.</p>
-
-						<p> Our <a href="https://drive.google.com/open?id=0B51JKcEdNx3pN1J0aEtZT0ZwSTQ">presentation</a> and <a href="https://drive.google.com/open?id=0B51JKcEdNx3pMnFLZE16ZTYxVmM">dossier</a></p></p>
-					</section>
-					<section> 
-						<h3> Mobile stage </h3>
-						<p> We designed a mobile stage for <a href="https://cke.nl/">CKE</a>.</p>
-
-						<p> Our <a href="https://drive.google.com/file/d/0B51JKcEdNx3pN1J0aEtZT0ZwSTQ/view">dossier</a> and <a href="https://larsgw.github.io/presents/?s=OOAccount&p=Een%20Podium%20Voor%20Het%20C
-KE">presentation</a>
-					</section>
-					<section> 
-						<h3> Fire training facility </h3>
-						<p> We designed a fire training facility for the Dutch company Tegema. </p>
-						<p> Our <a href="https://drive.google.com/open?id=0B8lpnm7AoCAMQXRiZExYSjFIWUk">dossier</a> and <a href="https://drive.google.com/open?id=1TXmlSJbwq2R1XDnGKpavD2sqbbkElrZdqj1dxYGSEDA">presentation</a> </p>
-					</section>
-					<section>
-						<h3> Technasium Top Award </h3>
-						<section> <p> The <a href="http://www.technasiumtopaward.nl/">Technasium Top Awards</a> is a yearly competition hosted by the technasium. When we took part in it our team ended up in second place in the regional finals. </p>
-							<p> Our <a href="https://drive.google.com/open?id=0BxiIlO7qIuDjNHlIaTc3SlB3N28"> presentation </a> (download) </p>
+			<section class="section1">
+				<section class="column1">
+					<section class="grid2_1">
+						<section style="padding: 0 10px; text-align: justify;">
+							<h2 style="text-align: center;"> Technasium </h2>
+							<p> <a href="https://www.technasium.nl/">Technasium</a> is a Dutch programme to introduce students from the age 13-18 to both technical studies and trade and industry, by facilitating students to search for projects at real-life companies, and to actually completing these projects. </p>
 						</section>
+						<img class=animation animSrc="img/technasium/mechanism/mechanism" fps=24 frames=80 style="width: 75%; margin: auto">
 					</section>
-				</section>
+					<div class="hidable hidden" constHeight=false>
+						<div>
+							<section class="column2">
+								<section class=grid2_1>
+									<img src="img/technasium/chair_scematic.png" style="width: 80%; margin: auto;">
+									<section style="padding: 0 10px;">
+										<h3 style="text-align: center;"> Office of the future </h3>
+										<p> The Dutch construction company <a href="https://heijmans.nl/">Heijmans</a> decided to host a competition to design the office of the future. Our team ended up winning this competition and getting a chance to present our idea in the <a href="https://www.nmm.nl/">National Military Museum</a> in Soesterberg.</p>
 
-				<section id="physics">
-					<h2> 2D Physics Engine </h2>
-					<p> A simple 2d impulse based physics engine programmed using <a href="https://www.python.org/">Python</a>. It handles linear and angular motion and rigid body collisions with friction between any 2D polygons, but works best for convex ones. 
-						<figure> <img src="pt.gif" width=760/> </figure>
-						<a href="https://github.com/robsorb/robsorb.github.io/raw/master/Physics_v1.zip">Download code</a>
-					</p>
+										<p> Our <a href="https://drive.google.com/open?id=0B51JKcEdNx3pN1J0aEtZT0ZwSTQ">presentation</a> and <a href="https://drive.google.com/open?id=0B51JKcEdNx3pMnFLZE16ZTYxVmM">dossier</a></p></p>
+									</section>
+								</section>
+								<section class=grid2_1 style="margin: 80px 0;">
+									<!--<section style="padding: 0 10px;">
+										<h3 style="text-align: center;"> Technasium Top Award </h3>
+										<section> <p style="text-align: justify;"> The <a href="http://www.technasiumtopaward.nl/">Technasium Top Awards</a> is a yearly competition hosted by the technasium. When we took part in it our team ended up in second place in the regional finals. </p>
+										<p> Our <a href="https://drive.google.com/open?id=0BxiIlO7qIuDjNHlIaTc3SlB3N28"> presentation </a> (download) </p>
+										</section>
+									</section>-->
+									<section style="padding: 0 20px;">
+										<h3 style="text-align: center;"> Fire training facility </h3>
+										<p style="text-align: justify;"> We designed a fire training facility for the Dutch company Tegema. </p>
+										<p> Our <a href="https://drive.google.com/open?id=0B8lpnm7AoCAMQXRiZExYSjFIWUk">dossier</a> and <a href="https://drive.google.com/open?id=1TXmlSJbwq2R1XDnGKpavD2sqbbkElrZdqj1dxYGSEDA">presentation</a> </p>
+									</section>
+									<section style="padding: 0 20px; width: 100%;">
+										<h3 style="text-align: center;"> Mobile stage </h3>
+										<p style="text-align: justify;"> We designed a mobile stage for the <a href="https://cke.nl/">CKE</a>.</p>
+
+										<p> Our <a href="https://drive.google.com/file/d/0B51JKcEdNx3pN1J0aEtZT0ZwSTQ/view">dossier</a> and <a href="https://larsgw.github.io/presents/?s=OOAccount&p=Een%20Podium%20Voor%20Het%20C
+	KE">presentation</a>
+									</section>
+								</section>
+
+							</section>
+						</div>
+					</div>
+
 				</section>
-				<section id="blender">
-					<h2> Blender </h2>
-					<p> <a href="https://www.blender.org/">Blender</a> is an open-source 3D editing programme which is also what I used to create the models, images and animations you can see in the Technasium presentations.
-					<figure> <img src="Earth.png" width=350/> <img src="dragon.png" width=350/> </figure>
-					
-					</p>
+			</section>
+			<section class="section2">
+				<section class="column1">
+					<section style="padding: 0 10px; margin-bottom: 50px;">
+						<h2 style="text-align: center;"> Blender </h2>
+						<p> <a href="https://www.blender.org/">Blender</a> is an open-source 3D editing programme which is also what I used to create the models, images and animations you can see in the Technasium presentations.
+						</p>
+					</section>
+					<div class=image_gallery id=gallery1>
+						<img src="img/blender/Earth16.jpg">
+						<img src="img/blender/departure3.png">
+						<img src="img/blender/dragon4.png">
+					</div>
 				</section>
- 			</article>
+			</section>
+
+			<section class="section3">
+				<section class="column1">
+					<section class="grid2_1">
+						<section style="padding: 0 10px; margin-bottom: 50px;">
+							<h2 style="text-align: center;">  2D Physics Engine  </h2>
+							<p> A simple 2d impulse based physics engine programmed using <a href="https://www.python.org/">Python</a>. It handles linear and angular motion and rigid body collisions with friction between any 2D polygons, but works best for convex ones.
+
+							</p>
+						</section>
+						<img class=animation animSrc="img/physics/collision/collision" fps=20 frames=80 style="width: 75%; margin: auto">
+					</section>
+
+					<img src="img/physics/pt.gif" width="100%">
+					<a href="https://github.com/robsorb/robsorb.github.io/raw/master/Physics_v1.zip">Download code</a>
+				</section>
+			</section>
 		</main>
 	</body>
 </html>
-

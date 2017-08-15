@@ -3,75 +3,204 @@ html {
 }
 
 body {
-	width: 800px;
-	margin-right: auto;
-	margin-left: auto;
-	background-color: white;
+	margin: 0;
+	padding: 0;
 }
+
+h1 {
+	color: white;
+	margin: 50px;
+}
+
+main {
+
+}
+
 a:link {
-	color: #5c5c5c;
+	color: #ff4500;
 	text-decoration: none;
 	font-weight: bold;
 }
 a:visited {
-	color: #8f8f8f;
+	color: #ff7d4d;
 }
 a:hover {
-	color: #4d4d4d;
-	text-decoration: underline;
-}
-article > section {
-	padding: 0 20px;
-	border: 1px solid #e0e0e0;
-	margin-bottom: 30px;
+
 }
 
-#physics {
-	padding: 0 20px;
-	border: 1px solid #e0e0e0;
-	margin-bottom: 30px;
-}
+.parallax {
+	position: relative;
+	width: 100%;
+	padding-top: 60%;
+	/*height: 800px;*/
 
-#hr{
-	border: none;
-	border-bottom: 1px solid #cfcfcf;
-	margin-top: 30px;
-	margin-bottom: 20px;
+	overflow: hidden;
 }
-
-header {
-	background-color: #cce27f;
-	padding: 10px;
-	color: white;
-	text-align: left;
-	border: 2px solid #d9ee91;
-	position: relative
-}
-header h1 {
-	margin-top: 5px;
-	margin-bottom: 5px;
-	margin-left: 60px;
-}
-header hr { 
-	border:none;
-	margin-top: 10px;
-	border-bottom: 2px solid white;
-}
-figure {
-	margin-left: 0;
-	margin-right: 0;
-}
-header:after {
-	content: '';
-	display: block;
-	width: 760px;
-	height: 10px;	
-	background: #e0e0e0;
+.parallax_element {
 	position: absolute;
-	left: 20px;
-	top: 100%;
+
+	width: 100%;
 }
 
-main {
-	padding: 0px 0px;
+.column1 {
+	width: 700px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 10px;
+
+}
+.column2 {
+	padding: 20px;
+}
+
+.section1 {
+	padding-top: 200px;
+	padding-bottom: 200px;
+	color: white;
+	background-color: black;
+}
+.section2 {
+	color: white;
+	background-color: black;
+}
+.section3 {
+	color: white;
+	background-color: black;
+	padding: 200px 0;
+}
+
+.grid2_1 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 0;
+}
+.grid3_1 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 0;
+}
+
+.hidable {
+	padding-top: 48px;
+	padding-bottom: 48px;
+	cursor: pointer;
+}
+.hidable > * {
+	border-top: 1px solid white;
+	border-bottom: 1px solid white;
+	cursor: auto;
+}
+
+.hidden:before {
+	content: '';
+	background-image: url('img/gui/up_arrow_lowres.png');
+   background-size: 32px;
+   width: 32px;
+   height: 32px;
+   display: inline-block;
+
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, -105%);
+	transition: 0.3s transform;
+}
+.hidden:hover:before {
+	transform: translate(-50%, -130%);
+}
+.unhidden:before {
+	content: '';
+	background-image: url('img/gui/up_arrow_lowres.png');
+   background-size: 32px;
+   width: 32px;
+   height: 32px;
+   display: inline-block;
+
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, -130%) rotate(180deg);
+	transition: 0.3s transform;
+}
+.unhidden:hover:before {
+	transform: translate(-50%, -105%) rotate(180deg);
+
+}
+
+.hidden:after {
+	content: '';
+	background-image: url('img/gui/up_arrow_lowres.png');
+   	background-size: 32px;
+   	width: 32px;
+   	height: 32px;
+   	display: inline-block;
+
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, 5%) rotate(180deg);
+	transition: 0.3s transform;
+}
+.hidden:hover:after {
+	transform: translate(-50%, 30%) rotate(180deg);
+}
+.unhidden:after {
+	content: '';
+	background-image: url('img/gui/up_arrow_lowres.png');
+   background-size: 32px;
+   width: 32px;
+   height: 32px;
+   display: inline-block;
+
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, 30%) rotate(0);
+	transition: 0.3s transform;
+}
+.unhidden:hover:after {
+	transform: translate(-50%, 5%) rotate(0);
+}
+
+
+
+.image_gallery {
+
+	overflow: hidden;
+}
+
+.image_gallery img {
+
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+#gallery1 {
+	position: relative;
+	width: 100%;
+	height: 400px;
+	margin-bottom: 50px;
+}
+
+#navigation {
+	position: fixed;
+	right: 0px;
+	padding: 0px;
+	margin: 30px;
+	width: 64px;
+	height: 64px;
+	top: 0;
+
+	border-radius: 50%;
+	transition: background-color 0.5s;
+}
+#navigation > *{
+	position: absolute;
+	width: 32px;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+#navigation:hover {
+	background-color: rgba(255, 255, 255, 0.4);
+	cursor: pointer;
+	transition: background-color 0.5s;
 }
