@@ -40,7 +40,7 @@ class ParallaxObject {
    }
 
    onscroll(e) {
-      this.scrollY = e.pageY
+      this.scrollY = window.scrollY
 
       this.update()
    }
