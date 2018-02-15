@@ -3,15 +3,27 @@
 <html>
 	<head>
 		<title> Rob Schellingerhout </title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF8">
 		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
+		<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
 		<link href="style.css" rel="stylesheet" type="text/css" />
+		<link href="physics/style.css" rel="stylesheet" type="text/css" >
 
 		<script type="text/javascript" src="jquerry.js"></script>
 
-		<script type="text/javascript" src="parallax.js"></script>
-		<script type="text/javascript" src="animation.js"></script>
-		<script type="text/javascript" src="gui.js"></script>
+		<script type="text/javascript" src="physics/general.js"></script>
+		<script type="text/javascript" src="physics/frame.js"></script>
+		<script type="text/javascript" src="physics/numberInput.js"></script>
+		<script type="text/javascript" src="physics/graphics.js"></script>
+		<script type="text/javascript" src="physics/vectors.js"></script>
+		<script type="text/javascript" src="physics/geometry.js"></script>
+		<script type="text/javascript" src="physics/space.js"></script>
+		<script type="text/javascript" src="physics/physics.js"></script>
+		<script type="text/javascript" src="physics/demo.js"></script>
+		<script type="text/javascript" src="physics/input.js"></script>
 
+		<script type="text/javascript" src="parallax.js"></script>
+		<script type="text/javascript" src="gui.js"></script>
 		<script type="text/javascript" src="script.js"></script>
 	</head>
 
@@ -27,7 +39,7 @@
 				<h1 class="parallax_element" distance=0.2 startHeight=0.9> Rob Schellingerhout </h1>
 
 				<img src="img/header/header_terrain1.png" class="parallax_element" distance=0.5 startHeight=0.2>
-				<img src="img/header/header_reflection.png" class="parallax_element" distance=0.5 startHeight=0.2>
+				<img src="img/header/header_reflection.png" class="parallax_element" distance=0.5 startHeight=0.26>
 				<img src="img/header/header_birds.png" class="parallax_element" distance=0.6 startHeight=0.3>
 				<img src="img/header/header_fg.png" class="parallax_element" distance=1>
 
@@ -44,30 +56,29 @@
 				<section class="column1">
 					<section class="grid2_1">
 						<section style="padding: 0 10px; text-align: justify;">
+
 							<h2 style="text-align: center;"> Technasium </h2>
 							<p> <a href="https://www.technasium.nl/">Technasium</a> is a Dutch programme to introduce students from the age 13-18 to both technical studies and trade and industry, by facilitating students to search for projects at real-life companies, and to actually completing these projects. </p>
 						</section>
-						<img class=animation animSrc="img/technasium/mechanism/mechanism" fps=24 frames=80 style="width: 75%; margin: auto">
+						<video autoplay loop style="width: 70%;">
+							<source src="video/technasium/mechanism.ogv" type="video/ogg">
+						</video>
+
 					</section>
 					<div class="hidable hidden" constHeight=false>
 						<div>
 							<section class="column2">
 								<section class=grid2_1>
 									<img src="img/technasium/chair_scematic.png" style="width: 80%; margin: auto;">
+
 									<section style="padding: 0 10px;">
 										<h3 style="text-align: center;"> Office of the future </h3>
 										<p> The Dutch construction company <a href="https://heijmans.nl/">Heijmans</a> decided to host a competition to design the office of the future. Our team ended up winning this competition and getting a chance to present our idea in the <a href="https://www.nmm.nl/">National Military Museum</a> in Soesterberg.</p>
 
-										<p> Our <a href="https://drive.google.com/open?id=0B51JKcEdNx3pN1J0aEtZT0ZwSTQ">presentation</a> and <a href="https://drive.google.com/open?id=0B51JKcEdNx3pMnFLZE16ZTYxVmM">dossier</a></p></p>
+										<p> Our <a href="https://larsgw.github.io/presents/?s=OOAccount&p=Werkplek%20van%20de%20toekomst">presentation</a> and <a href="https://drive.google.com/open?id=0B51JKcEdNx3pMnFLZE16ZTYxVmM">dossier</a></p></p>
 									</section>
 								</section>
 								<section class=grid2_1 style="margin: 80px 0;">
-									<!--<section style="padding: 0 10px;">
-										<h3 style="text-align: center;"> Technasium Top Award </h3>
-										<section> <p style="text-align: justify;"> The <a href="http://www.technasiumtopaward.nl/">Technasium Top Awards</a> is a yearly competition hosted by the technasium. When we took part in it our team ended up in second place in the regional finals. </p>
-										<p> Our <a href="https://drive.google.com/open?id=0BxiIlO7qIuDjNHlIaTc3SlB3N28"> presentation </a> (download) </p>
-										</section>
-									</section>-->
 									<section style="padding: 0 20px;">
 										<h3 style="text-align: center;"> Fire training facility </h3>
 										<p style="text-align: justify;"> We designed a fire training facility for the Dutch company Tegema. </p>
@@ -79,6 +90,18 @@
 
 										<p> Our <a href="https://drive.google.com/file/d/0B51JKcEdNx3pN1J0aEtZT0ZwSTQ/view">dossier</a> and <a href="https://larsgw.github.io/presents/?s=OOAccount&p=Een%20Podium%20Voor%20Het%20C
 	KE">presentation</a>
+									</section>
+								</section>
+								<section class=grid2_1 style="margin: 80px 0;">
+									<section style="padding: 0 20px;">
+										<h3 style="text-align: center;"> Hexapod </h3>
+										<p style="text-align: justify;"> We helped the manufacturing company <a href="http://www.aaebv.com/">AAE</a> improve a robot they used for demonstrations at various events.</p>
+										<p> Our <a href="https://drive.google.com/open?id=1Ju7ETGL38w-SGzGJ2nq27Ff85oYfiCFq">dossier</a> <!--and a <a href="">video</a> of the final product--> </p>
+									</section>
+									<section style="padding: 0 20px; width: 100%;">
+										<video width="350" height="350" autoplay loop style="transform: translate(0, -50px)">
+											<source src="video/technasium/robot.ogv" type="video/ogg">
+										</video>
 									</section>
 								</section>
 
@@ -97,6 +120,7 @@
 					</section>
 					<div class=image_gallery id=gallery1>
 						<img src="img/blender/Earth16.jpg">
+						<img src="img/blender/lowPoly1.png">
 						<img src="img/blender/departure3.png">
 						<img src="img/blender/dragon4.png">
 					</div>
@@ -108,15 +132,57 @@
 					<section class="grid2_1">
 						<section style="padding: 0 10px; margin-bottom: 50px;">
 							<h2 style="text-align: center;">  2D Physics Engine  </h2>
-							<p> A simple 2d impulse based physics engine programmed using <a href="https://www.python.org/">Python</a>. It handles linear and angular motion and rigid body collisions with friction between any 2D polygons, but works best for convex ones.
+							<p> A simple 2d impulse based physics engine programmed using javascript. It handles linear and angular motion and rigid body collisions between any 2D polygons. An interactive demo has been provided below.
 
 							</p>
 						</section>
-						<img class=animation animSrc="img/physics/collision/collision" fps=20 frames=80 style="width: 75%; margin: auto">
+						<video width="350" height="350" autoplay loop style="width: 75%;">
+							<source src="video/physics/collision.ogv" type="video/ogg">
+						</video>
 					</section>
 
-					<img src="img/physics/pt.gif" width="100%">
-					<a href="https://github.com/robsorb/robsorb.github.io/raw/master/Physics_v1.zip">Download code</a>
+					<div id="simulation" class="frame">
+
+						<canvas class='framed' id="simCanvas"></canvas>
+						<div id="simGui" class='framed active'>
+							<section style="padding-left: 20px; padding-right: 20px;">
+								<h3> Settings </h3>
+								<section>
+									<section class="grid2_1">
+									<section style="padding: 0 20px; text-align: justify;">
+										<h4 style="text-align: center">Graphics</h4>
+
+										<ul style="list-style-type:none;">
+											<li style="padding: 5px;"> <input type='checkbox' id="velocityCheckbox" checked><label for="velocityCheckbox"> Show velocity</label> </li>
+											<li style="padding: 5px;"> <input type='checkbox' id="angularVelocityCheckbox" checked><label for="angularVelocityCheckbox"> Show angular velocity</label> </li>
+											<li style="padding: 5px;"> <input type='checkbox' id="impulsesCheckbox" checked><label for="impulsesCheckbox"> Show collision impulses</label> </li>
+											<li style="padding: 5px;"> <input type='checkbox' id="COMCheckbox" checked><label for="COMCheckbox"> Show center of mass</label> </li>
+											<li style="padding: 5px;"> <input type='checkbox' id="normalsCheckbox"><label for="normalsCheckbox"> Show normals</label> </li>
+											<li style="padding: 5px;"> <input type='checkbox' id="trisCheckbox"><label for="trisCheckbox"> Show triangulated mesh</label> </li>
+											<li style="padding: 5px;"> <input type='checkbox' id="radiusCheckbox"><label for="radiusCheckbox"> Show radius</label> </li>
+
+										</ul>
+									</section>
+									<section style="padding: 0 10px; text-align: justify;">
+										<h4 style="text-align: center">Things you probably shouldn't touch</h5>
+
+										<ul style="list-style-type:none;">
+											<li style="padding: 5px;">  Simulation speed  <br><div id=simSpeedInput class="numInput" width=80 height=18 step=0.1 min=0 decimals=2 default=1></div>   </li>
+											<li style="padding: 5px;">  The coefficient of restitution  <br><div id=simBounceInput class="numInput" width=80 height=18 step=0.05 min=0 max=1 decimals=2 default=0></div>   </li>
+											<li style="padding: 5px;">  Gravitational acceleration  <br><div id=simGravityInput class="numInput" width=80 height=18 step=1 min=0 decimals=2 default=9.81></div>   </li>
+											<li style="padding: 5px;">  Mouse force  <br><div id=simMouseForceInput class="numInput" width=80 height=18 step=0.1 min=0 decimals=2 default=1></div>   </li>
+										</ul>
+									</section>
+
+								</section>
+								</section>
+							</section>
+						</div>
+						<div id="simSettings">
+							<button id=simReset onclick="resetSim()"><i class="fas fa-sync-alt"></i></button>
+							<input type="checkbox" id="simSettingsCheckbox" class="settings" onchange="toggleSimSettings(this)"><label for="simSettingsCheckbox"></label>
+						</div>
+					</div>
 				</section>
 			</section>
 		</main>
