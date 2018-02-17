@@ -50,8 +50,13 @@ class Camera {
 	}
 	text(t, s, c, kwargs={}) {
 		kwargs = Object.assign({}, kwargs)
-		kwargs = defaultkwargs(kwargs, {loc:Vec(0, 0), rot:0, scale:1})
+		kwargs = defaultkwargs(kwargs, {loc:Vec(0, 0), rot:0, scale:1, font:'Arial', alignment:'start'})
 		this.g.text(t, s, c, this.tocam(kwargs))
+	}
+	measureText(t, s, c, kwargs={}) {
+		kwargs = Object.assign({}, kwargs)
+		kwargs = defaultkwargs(kwargs, {loc:Vec(0, 0), rot:0, scale:1, font:'Arial', alignment:'start'})
+		return this.g.measureText(t, s, c, this.tocam(kwargs))
 	}
 	image(src, kwargs={}) {
 		kwargs = Object.assign({}, kwargs)
@@ -204,6 +209,15 @@ class Graphics {
 		var o = rec(kwargs.loc.r, kwargs.loc.a-kwargs.rot);
 		ctx.fillText(t, o.x, o.y);
 		ctx.restore();
+	}
+	measureText(t, s, kwargs={}) {
+		kwargs = defaultkwargs(kwargs, {loc:Vec(0, 0), rot:0, scale:1, font:'Arial', alignment:'start'})
+		var ctx = this.canvas.getContext("2d");
+		ctx.save()
+		ctx.font = s*kwargs.scale+"px "+kwargs.font;
+		var width = ctx.measureText(t)
+		ctx.restore();
+		return width
 	}
 	image(src, kwargs={}) {
 		kwargs = defaultkwargs(kwargs, {loc:Vec(0, 0), rot:0, scale:1})

@@ -1,5 +1,5 @@
 class RigidBody extends Physical {
-   constructor(s, verts, loc, rot, vel, aVel, mass) {
+   constructor(s, verts, loc, rot, vel, aVel, mass, rel=true) {
 
       super(s)
 
@@ -27,20 +27,24 @@ class RigidBody extends Physical {
       for (let t of this._triangulated) {
          this.triangulated.push([vecsub(t[0], this.COM), vecsub(t[1], this.COM), vecsub(t[2], this.COM)])
       }
+      if (!rel) this.loc = this.loc.add(this.COM)
+
       this.r = 0
       for (let v of this.verts) {
          this.r = max(v.r, this.r)
       }
       this.impulseTimer = 0;
       this.impulses = []
+      this.friction = []
       for (let v of this.verts) {
          this.impulses.push(Vec(0, 0))
+         this.friction.push(Vec(0, 0))
       }
+      this.impulseTimer = 0;
 
       this.prevLoc = this.loc
       this.test = []
       this.path = []
-      this.friction = []
    }
 
    globalVerts(i) {
@@ -52,7 +56,7 @@ class RigidBody extends Physical {
       this.prevLoc = this.loc
 
       var ic = this.g.cameras[0].internalcoords(mouse.loc)
-      if (this.s.mF.o === this) this.applyForce(vecscale(vecsub(ic, transform(this.s.mF.loc, this.loc, this.rot)), this.s.mF.scale), rotate(this.s.mF.loc, this.rot))
+      if (this.s.mF.o === this) this.applyForce(vecscale(vecsub(ic, transform(this.s.mF.loc, this.loc, this.rot)), this.s.mF.scale * numInputIds.simMouseForceInput.value), rotate(this.s.mF.loc, this.rot))
 
       this.move()
 
@@ -95,8 +99,13 @@ class RigidBody extends Physical {
       this.test1 = undefined
       this.test2 = undefined
       this.path = []
-      this.friction = []
-      for (let i = 0; i < this.impulses.length; i++) this.impulses[i] = Vec(0, 0)
+
+      this.impulseTimer += 1/this.s.fps;
+      if (this.impulseTimer > 0.3) {
+         for (let i = 0; i < this.impulses.length; i++) this.impulses[i] = Vec(0, 0)
+         for (let i = 0; i < this.friction.length; i++) this.friction[i] = Vec(0, 0)
+         this.impulseTimer = 0;
+      }
 
       let c = false
       for (let i = 0; i < 1; i++) {
@@ -115,6 +124,11 @@ class RigidBody extends Physical {
    }
 
    impulseResolution(object, rPrev) {
+      let globalVertsA = transformverts(this.verts, this.loc, this.rot); let globalVertsB = transformverts(object.verts, object.loc, object.rot)
+      if (vertsInside(globalVertsB, globalVertsA).length > 0) {
+         for (let i = 0; i < this.impulses.length; i++) this.impulses[i] = Vec(0, 0)
+         for (let i = 0; i < this.friction.length; i++) this.friction[i] = Vec(0, 0)
+      }
       for (let n = 0; n < 1; n++) {
          let globalVertsA = transformverts(this.verts, this.loc, this.rot); let globalVertsB = transformverts(object.verts, object.loc, object.rot)
          let cVertsA = vertsInside(globalVertsB, globalVertsA); let cVertsB = vertsInside(globalVertsA, globalVertsB)
@@ -200,6 +214,8 @@ class RigidBody extends Physical {
                let rAP = point.sub(this.loc); let rBP = point.sub(object.loc)
 
                let friction = this.getFriction(object, point, n, normalForce.r).scale(distanceToLine(point, indexBound(globalVertsB, edge), indexBound(globalVertsB, edge+1)) / distance)
+
+               this.friction[i] = this.friction[i].add(friction);
 
                if (this.movable) dVelA = dVelA.add(friction.scale(1/this.mass)); dAvelA += veccross(rAP, friction).z / this.I
                if (object.movable) dVelB = dVelB.add(friction.scale(-1/object.mass)); dAvelB += -veccross(rBP, friction).z / object.I
@@ -339,9 +355,11 @@ class RigidBody extends Physical {
       }
    }
    render() {
-      let mainColor = 'gray'; let normalColors = 'black'; let triColor = 'lightgray'; let radiusColor = 'rgb(255, 200, 200)'
+      let mainColor = 'gray'; let normalColors = 'black'; let triColor = 'lightgray'; let radiusColor = 'rgb(255, 200, 200)'; let textColor = 'black'
       let mouseForceColor = 'rgb(120, 120, 255)';
       let velocityColor = 'rgb(100, 200, 100)';
+      let impulseColor = 'rgb(255,200,0)'; let frictionColor = 'rgb(255,100,100)'
+      let fontSize = 10;
 
       this.g.stroke(this.g.cameras[0].polygon(this.verts, {loc:this.loc, rot:this.rot}), mainColor, 1)
 
@@ -360,9 +378,15 @@ class RigidBody extends Physical {
          this.g.cameras[0].vector(vecsub(ic, transform(this.s.mF.loc, this.loc, this.rot)), 3, mouseForceColor, {loc:transform(this.s.mF.loc, this.loc, this.rot), style:"arrow"})
       }
 
+
       if (document.getElementById('impulses'+'Checkbox').checked) {
          for (let i = 0; i < this.impulses.length; i++) {
-            this.g.cameras[0].vector(this.impulses[i], 2, 'red', {loc:this.globalVerts(i), scale:10, style:"arrow"})
+            this.g.cameras[0].vector(this.impulses[i], 2, impulseColor, {loc:this.globalVerts(i), scale:10, style:"arrow"})
+         }
+      }
+      if (document.getElementById('friction'+'Checkbox').checked) {
+         for (let i = 0; i < this.friction.length; i++) {
+            this.g.cameras[0].vector(this.friction[i], 2, frictionColor, {loc:this.globalVerts(i), scale:10, style:"arrow"})
          }
       }
 
@@ -370,8 +394,25 @@ class RigidBody extends Physical {
       if (document.getElementById('angularVelocity'+'Checkbox').checked) this.g.cameras[0].rotation(this.aVel*20, 5, velocityColor, {loc:this.loc, scale:1, style:"arrow"})
       if (document.getElementById('COM'+'Checkbox').checked) this.g.cameras[0].cross(8, 2, mainColor, {loc:this.loc, scale:1/this.g.cameras[0].scale})
 
-      for (let f of this.friction) {
-         this.g.cameras[0].vector(f.force, 3, 'aqua', {loc:f.loc, style:'arrow', scale:10})
+      // let textWidth = max(this.g.measureText("m: "+this.mass.toFixed(2), 10).width, this.g.measureText("I: "+round(this.I), 10).width)
+      // let textHeight = 10;
+      // let border = 5;
+      // let width = textWidth + border; let height = textHeight + border
+
+      // this.g.fill(this.g.cameras[0].polygon(verts(-width/2,-height, width/2,-height, width/2,height, -width/2,height), {scale:1/this.g.cameras[0].scale, loc:this.loc.add(Vec(0, (26-textHeight/2)/this.g.cameras[0].scale))}), 'rgba(255,255,255,1)')
+
+      if (document.getElementById('mass'+'Checkbox').checked) this.g.cameras[0].text("m: "+this.mass.toFixed(2), fontSize/this.g.cameras[0].scale, textColor, {loc: this.loc.add(Vec(0, fontSize*2/this.g.cameras[0].scale)), alignment:'center'})
+      if (document.getElementById('MOI'+'Checkbox').checked && document.getElementById('mass'+'Checkbox').checked) this.g.cameras[0].text("I: "+round(this.I), fontSize/this.g.cameras[0].scale, textColor, {loc: this.loc.add(Vec(0, fontSize*3/this.g.cameras[0].scale)), alignment:'center'})
+      else if (document.getElementById('MOI'+'Checkbox').checked) this.g.cameras[0].text("I: "+round(this.I), fontSize/this.g.cameras[0].scale, textColor, {loc: this.loc.add(Vec(0, fontSize*2/this.g.cameras[0].scale)), alignment:'center'})
+
+      if (document.getElementById('vertNum'+'Checkbox').checked) {
+         for (let i = 0; i < this.verts.length; i++) {
+            let text = i+1
+            let r = ((max(this.g.measureText(text, fontSize).width, fontSize))/2+2)/this.g.cameras[0].scale
+            let n1 = rotate(this.normals[i], this.rot); let n2 = rotate(indexBound(this.normals, i-1), this.rot)
+            let d = normalize(vecaverage(n1, n2)).scale(r)
+            this.g.cameras[0].text(text, fontSize/this.g.cameras[0].scale, mainColor, {loc: this.globalVerts(i).add(Vec(0, fontSize/2/this.g.cameras[0].scale)).add(d), alignment:'center'})
+         }
       }
    }
 }
@@ -390,6 +431,7 @@ class StaticObject extends RigidBody {
       let mainColor = 'gray'; let normalColors = 'black'; let triColor = 'lightgray'; let radiusColor = 'rgb(255, 200, 200)'
       let mouseForceColor = 'rgb(120, 120, 255)';
       let velocityColor = 'rgb(100, 200, 100)';
+      let impulseColor = 'rgb(255,200,0)'; let frictionColor = 'rgb(255,100,100)'
 
       this.g.stroke(this.g.cameras[0].polygon(this.verts, {loc:this.loc, rot:this.rot}), mainColor, 1)
 
@@ -400,6 +442,17 @@ class StaticObject extends RigidBody {
          for (let i = 0; i < this.normals.length; i++) {
             var c = vecaverage(this.globalVerts(i), this.globalVerts(i+1))
             this.g.cameras[0].vector(this.normals[i], 3, normalColors, {loc:c, rot:this.rot, scale:10/this.g.cameras[0].scale, style:"line"})
+         }
+      }
+
+      if (document.getElementById('impulses'+'Checkbox').checked) {
+         for (let i = 0; i < this.impulses.length; i++) {
+            this.g.cameras[0].vector(this.impulses[i], 2, impulseColor, {loc:this.globalVerts(i), scale:10, style:"arrow"})
+         }
+      }
+      if (true) {
+         for (let i = 0; i < this.friction.length; i++) {
+            this.g.cameras[0].vector(this.friction[i], 2, frictionColor, {loc:this.globalVerts(i), scale:10, style:"arrow"})
          }
       }
 

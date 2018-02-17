@@ -76,7 +76,7 @@
 						<section style="padding: 0 10px; text-align: justify;">
 
 							<h2 style="text-align: center;"> Technasium </h2>
-							<p> <a href="https://www.technasium.nl/">Technasium</a> is a Dutch programme to introduce students from the age 13-18 to both technical studies and trade and industry, by facilitating students to search for projects at real-life companies, and to actually completing these projects. </p>
+							<p> <a href="https://www.technasium.nl/">Technasium</a> is a Dutch programme to introduce students from the age 13-18 to both technical studies and trade and industry, by facilitating students to search for projects at real-life companies, and to actually complete these projects. </p>
 						</section>
 						<video autoplay loop style="width: 70%;">
 							<source src="video/technasium/mechanism.ogv" type="video/ogg">
@@ -133,7 +133,7 @@
 				<section class="column1">
 					<section style="padding: 0 10px; margin-bottom: 50px;">
 						<h2 style="text-align: center;"> Blender </h2>
-						<p> <a href="https://www.blender.org/">Blender</a> is an open-source 3D editing programme which is also what I used to create the models, images and animations you can see in the Technasium presentations.
+						<p> The images below were created using the open-source 3D editing programme <a href="https://www.blender.org/">Blender</a>.
 						</p>
 					</section>
 					<div class=image_gallery id=gallery1>
@@ -150,7 +150,7 @@
 					<section class="grid2_1">
 						<section style="padding: 0 10px; margin-bottom: 50px;">
 							<h2 style="text-align: center;">  2D Physics Engine  </h2>
-							<p> A simple 2d impulse based physics engine programmed using javascript. It handles linear and angular motion and rigid body collisions width friction between any 2D polygons. An interactive demo has been provided below.
+							<p> Below you'll find an interactive demo of a 2D impulse based physics engine programmed using javascript. It handles linear and angular motion and rigid body collisions with friction						between any 2D polygons.
 
 							</p>
 						</section>
@@ -167,29 +167,40 @@
 								<h3> Settings </h3>
 								<section>
 									<section class="grid2_1">
-									<section style="padding: 0 20px; text-align: justify;">
+									<section style="padding: 0; text-align: justify;">
 										<h4 style="text-align: center">Graphics</h4>
+										<section class="grid2_1">
+											<section>
+												<ul style="list-style-type:none; font-size: 11px; margin: 0; padding: 0;">
+													<li style="padding: 5px;"> <input type='checkbox' id="velocityCheckbox" checked><label for="velocityCheckbox"> Show velocity</label> </li>
+													<li style="padding: 5px;"> <input type='checkbox' id="angularVelocityCheckbox" checked><label for="angularVelocityCheckbox"> Show angular velocity</label> </li>
+													<li style="padding: 5px;"> <input type='checkbox' id="impulsesCheckbox" checked><label for="impulsesCheckbox"> Show collision impulses</label> </li>
+													<li style="padding: 5px;"> <input type='checkbox' id="frictionCheckbox" checked><label for="frictionCheckbox"> Show friction</label> </li>
+													<li style="padding: 5px;"> <input type='checkbox' id="massCheckbox" ><label for="massCheckbox"> Show mass</label> </li>
+													<li style="padding: 5px;"> <input type='checkbox' id="MOICheckbox" ><label for="MOICheckbox"> Show moment of inertia</label> </li>
 
-										<ul style="list-style-type:none;">
-											<li style="padding: 5px;"> <input type='checkbox' id="velocityCheckbox" checked><label for="velocityCheckbox"> Show velocity</label> </li>
-											<li style="padding: 5px;"> <input type='checkbox' id="angularVelocityCheckbox" checked><label for="angularVelocityCheckbox"> Show angular velocity</label> </li>
-											<li style="padding: 5px;"> <input type='checkbox' id="impulsesCheckbox" checked><label for="impulsesCheckbox"> Show collision impulses</label> </li>
-											<li style="padding: 5px;"> <input type='checkbox' id="COMCheckbox" checked><label for="COMCheckbox"> Show center of mass</label> </li>
-											<li style="padding: 5px;"> <input type='checkbox' id="normalsCheckbox"><label for="normalsCheckbox"> Show normals</label> </li>
-											<li style="padding: 5px;"> <input type='checkbox' id="trisCheckbox"><label for="trisCheckbox"> Show triangulated mesh</label> </li>
-											<li style="padding: 5px;"> <input type='checkbox' id="radiusCheckbox"><label for="radiusCheckbox"> Show radius</label> </li>
-
-										</ul>
+												</ul>
+											</section>
+											<section>
+												<ul style="list-style-type:none; font-size: 11px; margin: 0; padding: 0;">
+													<li style="padding: 5px;"> <input type='checkbox' id="vertNumCheckbox" ><label for="vertNumCheckbox"> Show vertex numbers</label> </li>
+													<li style="padding: 5px;"> <input type='checkbox' id="COMCheckbox" checked><label for="COMCheckbox"> Show center of mass</label> </li>
+													<li style="padding: 5px;"> <input type='checkbox' id="normalsCheckbox"><label for="normalsCheckbox"> Show normals</label> </li>
+													<li style="padding: 5px;"> <input type='checkbox' id="trisCheckbox"><label for="trisCheckbox"> Show triangulated mesh</label> </li>
+													<li style="padding: 5px;"> <input type='checkbox' id="radiusCheckbox"><label for="radiusCheckbox"> Show detection radius</label> </li>
+												</ul>
+											</section>
+										</section>
 									</section>
-									<section style="padding: 0 10px; text-align: justify;">
-										<h4 style="text-align: center">Things you probably shouldn't touch</h5>
+									<section style="padding: 0; text-align: justify;">
+										<h4 style="text-align: center">Things you probably shouldn't touch</h4>
 
-										<ul style="list-style-type:none;">
-											<li style="padding: 5px;">  Simulation speed  <br><div id=simSpeedInput class="numInput" width=80 height=18 step=0.1 min=0 decimals=2 default=1></div>   </li>
-											<li style="padding: 5px;">  The coefficient of restitution  <br><div id=simBounceInput class="numInput" width=80 height=18 step=0.05 min=0 max=1 decimals=2 default=0></div>   </li>
-											<li style="padding: 5px;">  The coefficient of friction  <br><div id=simFrictionInput class="numInput" width=80 height=18 step=0.1 min=0 decimals=2 default=0.5></div>   </li>
-											<li style="padding: 5px;">  Gravitational acceleration  <br><div id=simGravityInput class="numInput" width=80 height=18 step=1 min=0 decimals=2 default=9.81></div>   </li>
-											<li style="padding: 5px;">  Mouse force  <br><div id=simMouseForceInput class="numInput" width=80 height=18 step=0.1 min=0 decimals=2 default=1></div>   </li>
+										<ul style="list-style-type:none; font-size: 11px;">
+											<li style="padding: 5px;">  Simulation speed  <br><div id=simSpeedInput class="numInput" width=60 height=16 step=0.1 min=0 decimals=2 default=1></div>   </li>
+											<li style="padding: 5px;">  The coefficient of restitution (Bounciness) <br><div id=simBounceInput class="numInput" width=60 height=16 step=0.05 min=0 max=1 decimals=2 default=0></div>   </li>
+											<li style="padding: 5px;">  The coefficient of friction  <br><div id=simFrictionInput class="numInput" width=60 height=16 step=0.1 min=0 decimals=2 default=0.5></div>   </li>
+											<li style="padding: 5px;">  Gravitational acceleration  <br><div id=simGravityInput class="numInput" width=60 height=16 step=1 min=0 decimals=2 default=9.81></div>   </li>
+											<li style="padding: 5px;">  Mouse force  <br><div id=simMouseForceInput class="numInput" width=60 height=16 step=0.1 min=0 decimals=2 default=1></div>   </li>
 										</ul>
 									</section>
 
