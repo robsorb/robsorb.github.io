@@ -11,6 +11,7 @@ class PhysicsSpace {
       this.speed = speed
 
       this.e = 0;
+      this.kFriction = 0.5;
 
       this.objects = []
       this.planets = []
@@ -27,6 +28,7 @@ class PhysicsSpace {
    update() {
       this.speed = numInputIds.simSpeedInput.value
       this.e = numInputIds.simBounceInput.value
+      this.kFriction = numInputIds.simFrictionInput.value
 
       this.g.cameras[0].center = Vec(this.g.canvas.width/2, this.g.canvas.height/2)
       mouse.update()

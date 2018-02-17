@@ -28,7 +28,7 @@ class ParallaxObject {
       this.parallax = parallax
       this.elm = elm
       this.distance = parseFloat(this.elm.getAttribute("distance"))
-      this.startHeight = parseFloat(this.elm.getAttribute("startHeight")) || 0
+      this.startHeight = parseFloat(this.elm.getAttribute("position")) || 0
 
       this.scrollY = 0
 

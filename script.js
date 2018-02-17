@@ -144,7 +144,7 @@ class Simulation {
 		this.rb = new RigidBody(this.s, verts(0, 0, 100, 0, 100, 300, 0, 300), Vec(0, -300), pi/2, Vec(0, 0), 0, 1);
 		this.rb2 = new RigidBody(this.s, poly5, Vec(0, -15), pi/2, Vec(-0, -50), 0, 5);
 
-		this.so = new StaticObject(this.s, verts(-1000, -200, -1000, 0, 1000, 0, 1000, -200), Vec(0, 300), 0)
+		this.so = new StaticObject(this.s, poly7, Vec(0, 300), 0)
 
 		selectedcam = this.cam
 	}

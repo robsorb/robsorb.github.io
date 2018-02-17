@@ -37,7 +37,7 @@ a:hover {
 .parallax {
 	position: relative;
 	width: 100%;
-	padding-top: 60%;
+	padding-top: 50%;
 	/*height: 800px;*/
 
 	overflow: hidden;

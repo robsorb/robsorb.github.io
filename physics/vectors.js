@@ -102,6 +102,9 @@ class Vector {
 	dot(v) {
 		return vecdot(this, v)
 	}
+	cross(v) {
+		return veccross(this, v)
+	}
 }
 function Vec(x, y, z=0) {
 	return new Vector(x, y, z)
