@@ -20,7 +20,8 @@ window.onload = function () {
 		correctorList.push(new HeightCorrect(elm))
 	}
    for (let elm of document.getElementsByClassName('frame')) frames.push(new Frame(elm))
-	for (let elm of document.getElementsByClassName('numInput')) numInputs.push(new numberInput(elm))
+
+   initUI()
 
    simSettingsCheckbox = document.getElementById('simSettingsCheckbox')
 	simGui = document.getElementById('simGui')

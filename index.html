@@ -13,7 +13,11 @@
 
 		<script type="text/javascript" src="physics/general.js"></script>
 		<script type="text/javascript" src="physics/frame.js"></script>
-		<script type="text/javascript" src="physics/numberInput.js"></script>
+
+		<script type="text/javascript" src="UI/zoom.js"></script>
+		<script type="text/javascript" src="UI/numberInput.js"></script>
+		<script type="text/javascript" src="UI/UI.js"></script>
+
 		<script type="text/javascript" src="physics/graphics.js"></script>
 		<script type="text/javascript" src="physics/vectors.js"></script>
 		<script type="text/javascript" src="physics/geometry.js"></script>
@@ -137,10 +141,10 @@
 						</p>
 					</section>
 					<div class=image_gallery id=gallery1>
-						<img src="img/blender/Earth16.jpg">
-						<img src="img/blender/lowPoly1.png">
-						<img src="img/blender/departure3.png">
-						<img src="img/blender/dragon4.png">
+						<img src="img/blender/Earth16.jpg" class="zoom">
+						<img src="img/blender/lowPoly1.png" class="zoom">
+						<img src="img/blender/departure3.png" class="zoom">
+						<img src="img/blender/dragon4.png" class="zoom">
 					</div>
 				</section>
 			</section>
@@ -195,12 +199,12 @@
 									<section style="padding: 0; text-align: justify;">
 										<h4 style="text-align: center">Things you probably shouldn't touch</h4>
 
-										<ul style="list-style-type:none; font-size: 11px;">
-											<li style="padding: 5px;">  Simulation speed  <br><div id=simSpeedInput class="numInput" width=60 height=16 step=0.1 min=0 decimals=2 default=1></div>   </li>
-											<li style="padding: 5px;">  The coefficient of restitution (Bounciness) <br><div id=simBounceInput class="numInput" width=60 height=16 step=0.05 min=0 max=1 decimals=2 default=0></div>   </li>
-											<li style="padding: 5px;">  The coefficient of friction  <br><div id=simFrictionInput class="numInput" width=60 height=16 step=0.1 min=0 decimals=2 default=0.5></div>   </li>
-											<li style="padding: 5px;">  Gravitational acceleration  <br><div id=simGravityInput class="numInput" width=60 height=16 step=1 min=0 decimals=2 default=9.81></div>   </li>
-											<li style="padding: 5px;">  Mouse force  <br><div id=simMouseForceInput class="numInput" width=60 height=16 step=0.1 min=0 decimals=2 default=1></div>   </li>
+										<ul style="list-style-type:none; font-size: 11px; text-align: right; margin: 0;">
+											<li style="padding: 5px;">  Simulation speed  <div id=simSpeedInput class="numInput" width=60 height=16 step=0.1 min=0 decimals=2 defaultValue=1></div>   </li>
+											<li style="padding: 5px;">  The coefficient of restitution (Bounciness) <div id=simBounceInput class="numInput" width=60 height=16 step=0.05 min=0 max=1 decimals=2 defaultValue=0></div>   </li>
+											<li style="padding: 5px;">  The coefficient of friction <div id=simFrictionInput class="numInput" width=60 height=16 step=0.1 min=0 decimals=2 defaultValue=0.5></div>   </li>
+											<li style="padding: 5px;">  Gravitational acceleration  <div id=simGravityInput class="numInput" width=60 height=16 step=1 min=0 decimals=2 defaultValue=9.81></div>   </li>
+											<li style="padding: 5px;">  Mouse force  <div id=simMouseForceInput class="numInput" width=60 height=16 step=0.1 min=0 decimals=2 defaultValue=1></div>   </li>
 										</ul>
 									</section>
 
