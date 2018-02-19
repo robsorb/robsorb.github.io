@@ -96,6 +96,16 @@ function createElement(type, parent) {
 
    return elm
 }
+function getChildrenByTagName(tag, elm) {
+   let children = []
+   for (let c of elm.children) {
+      if (c.tagName == tag) children.push(c)
+
+      children = children.concat(getChildrenByTagName(tag, c))
+   }
+   return children
+}
+
 function createSVG(type, parent) {
 
    var elm = document.createElementNS("http://www.w3.org/2000/svg", type);
@@ -127,25 +137,19 @@ class HeightCorrect {
    }
 }
 
-poly = verts(-10, 20, 0, 0, 100, -50, 150, -40, 130, 80, 170, 100, 160, 120, 100, 80, 80, 120, 50, 110, 30, 80, 80, 40, 50, 10)
-poly2 = verts(0,0, 200, -20, 150, 200, 150, 150, 50, 100, 100, 50)
-poly3 = verts(0, 0, 10, 0, 10, 200, 0, 200)
-poly4 = verts(0, 0, 100, 0, 100, 100, 0, 100)
-poly5 = verts(0, 0, 300, 0, 300, 200, 0, 200, 150, 120)
-poly6 = verts(0, 0, 100, 0, 120, 20, 130, 40, 130, 70, 80, 80, 90, 110, 0, 100)
-poly7 = verts(-1200,-200, -1000, -200, -1000, 0, 1000, 0, 1000, -200, 1200, -200, 1200, 200, -1200, 200)
+
 
 class Simulation {
 	constructor() {
 		this.g = new Graphics(document.getElementById("simCanvas"), 30)
-		this.cam = this.g.create_camera(Vec(0, 20), 0, 0.5)
+		this.cam = this.g.create_camera(Vec(0, -5), 0, 30)
 		this.s = new PhysicsSpace(this.g, 240, 1)
 
-		this.rb = new RigidBody(this.s, poly6, Vec(0, -500), -pi/3, Vec(0, 0), 0, 1);
-		this.rb = new RigidBody(this.s, verts(0, 0, 100, 0, 100, 300, 0, 300), Vec(0, -300), pi/2, Vec(0, 0), 0, 1);
-		this.rb2 = new RigidBody(this.s, poly5, Vec(0, -15), pi/2, Vec(-0, -50), 0, 5);
+      this.rb = new RigidBody(this.s, eqPoly(8, 0.5), Vec(-1, -7), 0, Vec(0, 0), 0, 1);
+		this.rb1 = new RigidBody(this.s, verts(0, 0, 3, 0, 3, 1, 0, 1), Vec(0, -5), 0, Vec(0, 0), 0, 2);
+		this.rb2 = new RigidBody(this.s, verts(0, 0, 1, 2, 2, 0, 2, 3, 0, 3), Vec(0, -1), 0, Vec(-0, -0), 0, 5);
 
-		this.so = new StaticObject(this.s, poly7, Vec(0, 300), 0)
+		this.so = new StaticObject(this.s, verts(-12,-3, -10,-3, -10,-1, 10,-1, 10,-3, 12,-3, 12,1, -12,1), Vec(0, 0), 0)
 
 		selectedcam = this.cam
 	}

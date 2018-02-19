@@ -2,6 +2,14 @@ function lineToPoint(l1, l2, p) {
 	let n = normalize(veccross(vecsub(l2, l1), Vec(0, 0, 1)));
 	return vecscale(vecdot(vecsub(p, l1), n), n);
 }
+function eqPoly(n, r) {
+	let verts = []
+	for (let i = 0; i < n; i++) {
+		verts.push(Vecp(r, 2*pi/n * (i+0.5)))
+	}
+	return verts
+}
+
 function distanceToLine(p, l1, l2) {
 	return abs(veccross(vecsub(p, l1), normalize(vecsub(l2, l1))).z);
 }
@@ -110,7 +118,6 @@ function vertsInside(verts1, verts2) {
 	}
 	return verts;
 }
-
 function bounded(verts, i, j) {
 	i = bound(i, 0, verts.length); j = bound(j, 0, verts.length)
 	let a = verts[i]; let b = verts[j]
@@ -125,6 +132,19 @@ function bounded(verts, i, j) {
 
 	return true
 }
+function selfIntersection(verts, i) {
+	let intersections = []
+	let a = indexBound(verts, i); let b = indexBound(verts, i+1)
+	for (let k = 0; k < verts.length; k++) {
+		index1 = bound(k, 0, verts.length); index2 = bound(k+1, 0, verts.length)
+		let l1 = verts[index1]; let l2 = verts[index2]
+		if (!(index1 == i || index2 == i || index1 == bound(i+1, 0, verts.length) || index2 == bound(i+1, 0, verts.length)) && crossing(a, b, l1, l2)) {
+			intersections.push(intersection(a, b, l1, l2))
+		}
+	}
+	return intersections
+}
+
 function triArea(a, b, c) {
 	if (a.x != undefined) {
 		let ac = vecsub(c, a); let ab = vecsub(b, a)

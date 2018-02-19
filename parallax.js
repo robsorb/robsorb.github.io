@@ -36,7 +36,9 @@ class ParallaxObject {
    }
 
    update() {
-      this.elm.style.top = floatToPx(this.parallax.elm.clientHeight * (1 - this.startHeight) - this.elm.clientHeight/2 - this.scrollY * this.distance + this.scrollY) //floatToPx(this.parallax.elm.clientHeight * (1 - this.startHeight) - this.elm.clientHeight/2 - this.scrollY * this.distance)
+      let rectP = this.parallax.elm.getBoundingClientRect()
+      let rect = this.elm.getBoundingClientRect()
+      this.elm.style.top = floatToPx(rectP.height * (1 - this.startHeight) - rect.height/2 - this.scrollY * this.distance + this.scrollY) //floatToPx(this.parallax.elm.clientHeight * (1 - this.startHeight) - this.elm.clientHeight/2 - this.scrollY * this.distance)
    }
 
    onscroll(e) {

@@ -55,15 +55,18 @@ class RigidBody extends Physical {
       this.forces = []
       this.prevLoc = this.loc
 
-      var ic = this.g.cameras[0].internalcoords(mouse.loc)
-      if (this.s.mF.o === this) this.applyForce(vecscale(vecsub(ic, transform(this.s.mF.loc, this.loc, this.rot)), this.s.mF.scale * numInputIds.simMouseForceInput.value), rotate(this.s.mF.loc, this.rot))
 
       this.move()
+
+      var ic = this.g.cameras[0].internalcoords(mouse.loc)
+      if (this.s.mF.o === this) {
+         this.applyForce(vecscale(vecsub(ic, transform(this.s.mF.loc, this.loc, this.rot)), this.s.mF.scale * numInputIds.simMouseForceInput.value), rotate(this.s.mF.loc, this.rot))
+      }
 
       for (let object of this.s.objects) { if (object!=this) {
          // this.applyForce(normalize(this.loc.sub(object.loc)).scale(-500000*this.mass*object.mass/(this.loc.sub(object.loc).r**2)))
       }}
-      this.vel = this.vel.add(Vec(0, numInputIds.simGravityInput.value*20).scale(this.s.dt()))
+      this.vel = this.vel.add(Vec(0, numInputIds.simGravityInput.value).scale(this.s.dt()))
 
       this.collision()
    }
@@ -154,7 +157,7 @@ class RigidBody extends Physical {
          return n.scale(-min(0, (1 + e) * vecdot(velAB, n) / (1 / this.mass + (veccross(rAP, n).z ** 2 / this.I) )))
       }
    }
-   getFriction(object, point, n, normalForce, kFriction = this.s.kFriction) {
+   getFriction(object, point, n, normalForce, sFriction = this.s.sFriction, kFriction = this.s.kFriction) {
       let rAP = point.sub(this.loc); let rBP = point.sub(object.loc)
       let velAP = veccross(Vec(0, 0, this.aVel), rAP).add(this.vel); let velBP = veccross(Vec(0, 0, object.aVel), rBP).add(object.vel)
       let velAB = vecsub(velAP, velBP)
@@ -167,7 +170,9 @@ class RigidBody extends Physical {
       } else if (!this.movable && object.movable) {
          var maxFriction =  abs(vecdot(velAB, dir) / (1 / this.mass + (veccross(rAP, dir).z ** 2 / this.I) ))
       }
-      return normalize(dir.scale(-vecdot(velAB, dir))).scale(min(abs(maxFriction), kFriction * normalForce))
+      let friction = (maxFriction > sFriction * normalForce) ? min(abs(maxFriction), kFriction * normalForce) : abs(maxFriction)
+
+      return normalize(dir.scale(-vecdot(velAB, dir))).scale(friction)
    }
    collisionImpulse(object, rPrev, cVerts, globalVertsA, globalVertsB) {
       let edges = []
@@ -316,7 +321,7 @@ class RigidBody extends Physical {
       }
       if (maxI != undefined) {
          this.test1 = {p:maxI, d:distances[maxI]}
-         let translation = distances[maxI].add(normalize(distances[maxI]).scale(0.1))
+         let translation = distances[maxI].add(normalize(distances[maxI]).scale(0.001))
 
          return translation
       }
@@ -391,7 +396,7 @@ class RigidBody extends Physical {
       }
 
       if (document.getElementById('velocity'+'Checkbox').checked) this.g.cameras[0].vector(this.vel, 3, velocityColor, {loc:this.loc, scale:1, style:"arrow"})
-      if (document.getElementById('angularVelocity'+'Checkbox').checked) this.g.cameras[0].rotation(this.aVel*20, 5, velocityColor, {loc:this.loc, scale:1, style:"arrow"})
+      if (document.getElementById('angularVelocity'+'Checkbox').checked) this.g.cameras[0].rotation(this.aVel * 0.2, 5, velocityColor, {loc:this.loc, scale:1, style:"arrow"})
       if (document.getElementById('COM'+'Checkbox').checked) this.g.cameras[0].cross(8, 2, mainColor, {loc:this.loc, scale:1/this.g.cameras[0].scale})
 
       // let textWidth = max(this.g.measureText("m: "+this.mass.toFixed(2), 10).width, this.g.measureText("I: "+round(this.I), 10).width)

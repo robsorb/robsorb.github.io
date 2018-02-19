@@ -28,7 +28,7 @@ class Zoomable {
       this.zoomed = createElement('img', document.body)
       this.zoomed.src = this.src
       this.zoomed.style.position = 'fixed'; this.zoomed.style.left = '50%'; this.zoomed.style.top = '50%';
-      this.zoomed.style.display = 'none'; this.zoomed.style.cursor = "grab"
+      this.zoomed.style.display = 'none'; this.zoomed.style.cursor = "grab"; this.zoomed.style.cursor = "-webkit-grab"
       this.resize()
 
       this.elm.addEventListener('mousedown', this.ondown.bind(this), false)
@@ -42,9 +42,9 @@ class Zoomable {
 		// IE 6/7/8
 		else this.zoomed.attachEvent("onmousewheel", this.onscroll.bind(this));
 
-      this.zoomed.addEventListener("mousedown", function(e){e.preventDefault(); this.mousedown = true; this.zoomed.style.cursor = "grabbing"}.bind(this), false)
+      this.zoomed.addEventListener("mousedown", function(e){e.preventDefault(); this.mousedown = true; this.zoomed.style.cursor = "-webkit-grabbing"}.bind(this), false)
       this.zoomed.addEventListener("mousemove", this.onmove.bind(this), false)
-      document.addEventListener("mouseup", function(e){this.mousedown = false; this.zoomed.style.cursor = "grab"}.bind(this), false)
+      document.addEventListener("mouseup", function(e){this.mousedown = false; this.zoomed.style.cursor = "-webkit-grab"}.bind(this), false)
 
       zoomables.push(this)
    }

@@ -85,6 +85,13 @@ class NumberInput {
          this.decrement.style.fontSize = this.height * 0.6 + 'px';
          this.decrement.style.transform = "translate(-40%, -50%)"
          this.decrementLabel.className = "fas fa-arrow-left"
+      } else if (this.buttonStyle == "circle") {
+         this.increment.style.fontSize = this.height * 0.3 + 'px';
+         this.increment.style.transform = "translate(50%, -50%)"
+         this.incrementLabel.className = "fas fa-circle"
+         this.decrement.style.fontSize = this.height * 0.3 + 'px';
+         this.decrement.style.transform = "translate(-50%, -50%)"
+         this.decrementLabel.className = "fas fa-circle"
       }
 
       this.input.addEventListener("mousedown", function (e) { if (this.mode != 2) { e.preventDefault(); e.stopPropagation(); } }.bind(this), false);
@@ -162,8 +169,9 @@ class NumberInput {
    }
    onchange() {
       this.viewMode()
-      if (!isNaN(this.input.value)) {
-         this.value = min(this.max, max(this.min, parseFloat(this.input.value)))
+      let value = eval(this.input.value.replace(/[^-()\d/*+.]/g, ''))
+      if (value !== undefined) {
+         this.value = min(this.max, max(this.min, parseFloat(value)))
       }
       this.setValue()
    }
@@ -193,7 +201,7 @@ class NumberInput {
    }
    setValue() {
       let decimals = ((this.value+'').split('.')[1] || []).length
-      if (this.round) this.input.value = this.value.toFixed(this.decimals)
-      else this.input.value = this.value.toFixed(max(this.decimals, decimals))
+
+      this.input.value = this.value.toFixed(this.decimals)
    }
 }
