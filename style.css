@@ -6,7 +6,13 @@
 html {
 	font-family: Roboto;
 }
-
+img {
+	-webkit-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+	overflow: hidden;
+}
 body {
 	margin: 0;
 	padding: 0;
@@ -180,15 +186,6 @@ a:hover:after {
 	transform: translate(-50%, 5%) rotate(0);
 }
 
-
-
-.image_gallery {
-	-webkit-user-select: none;
-   -moz-user-select: none;
-   -ms-user-select: none;
-   user-select: none;
-	overflow: hidden;
-}
 
 .image_gallery img {
 
