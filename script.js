@@ -32,7 +32,7 @@ window.onload = function () {
 
   initUI()
 
-   parallax = new Parallax("head_parallax")
+   // parallax = new Parallax("head_parallax")
 
    var element = document.getElementById("simCanvas");
    mouse = new Mouse(element)

@@ -1,49 +1,49 @@
+parallaxList = []
+window.addEventListener('load', function(e) {
+  for (let elm of document.getElementsByClassName('parallax-container')) parallaxList.push(new Parallax(elm))
+});
+window.addEventListener('scroll', function(e) {
+  parallaxList.map(elm => elm.onscroll(e))
+});
 class Parallax {
-   constructor(id) {
-      this.elm = document.getElementById(id)
-      this.objects = []
-      for (let child of this.elm.children) {
-         if (child.classList.contains("parallax_element")) {
-            this.objects.push(new ParallaxObject(this, child))
-         }
+  constructor(elm) {
+    this.elm = elm
+    // console.log(elm)
+    this.elm.style.position = 'relative'
+    this.div = createElement('div', this.elm)
+    this.div.style = 'position: absolute; width: 100%; height: 100%; clip: rect(auto,auto,auto,auto)'
+    this.elements = []
+    for (let child of this.elm.children) {
+      if (child.className.includes('parallax-element')) this.elements.push(child)
+      console.log(child)
+    }
+    this.elements.map(elm => this.div.appendChild(elm))
+    this.update()
+  }
+  update() {
+    let prog = Math.min(1, Math.max(0, -this.elm.getBoundingClientRect().y / this.elm.clientHeight))
+    this.elements.map(elm => {
+      if (!!elm.dataset.animation) {
+        elm.style.animationName = elm.dataset.animation
+        elm.style.animationTimingFunction = elm.dataset.timing || 'linear'
+        elm.style.animationPlayState = 'paused'
+        elm.style.animationDuration = '1s'
+        elm.style.animationDelay = -prog+'s'
+      } else {
+        let sensitivity = (isNaN(parseFloat(elm.dataset.sensitivity))) ? 1 : parseFloat(elm.dataset.sensitivity)
+        let offset = parseFloat(elm.dataset.offset) || 0
+        if (elm.dataset.fixed !== undefined) {
+          elm.style.position = 'fixed'
+          elm.style.top = this.elm.getBoundingClientRect().y + this.elm.clientHeight*offset + window.pageYOffset*(1-sensitivity)+'px'
+        } else {
+          elm.style.position = 'absolute'
+          elm.style.top = this.elm.clientHeight*offset + window.pageYOffset*(1-sensitivity)+'px'
+        }
       }
-      parallaxList.push(this)
-   }
-
-   update() {
-      for (let object of this.objects) {
-         object.update()
-      }
-   }
-
-   onscroll(e) {
-      for (let object of this.objects) {
-         object.onscroll(e)
-      }
-   }
-}
-
-class ParallaxObject {
-   constructor(parallax, elm) {
-      this.parallax = parallax
-      this.elm = elm
-      this.distance = parseFloat(this.elm.getAttribute("distance"))
-      this.startHeight = parseFloat(this.elm.getAttribute("position")) || 0
-
-      this.scrollY = 0
-
-      this.update()
-   }
-
-   update() {
-      let rectP = this.parallax.elm.getBoundingClientRect()
-      let rect = this.elm.getBoundingClientRect()
-      this.elm.style.top = floatToPx(rectP.height * (1 - this.startHeight) - rect.height/2 - this.scrollY * this.distance + this.scrollY) //floatToPx(this.parallax.elm.clientHeight * (1 - this.startHeight) - this.elm.clientHeight/2 - this.scrollY * this.distance)
-   }
-
-   onscroll(e) {
-      this.scrollY = window.scrollY
-
-      this.update()
-   }
+      // console.log(window.pageYOffset)
+    })
+  }
+  onscroll() {
+    this.update()
+  }
 }
