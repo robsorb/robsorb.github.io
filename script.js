@@ -13,22 +13,24 @@ window.onload = function () {
    for (let elm of document.getElementsByClassName("animation")) {
 		animationList.push(new Animation(elm))
 	}
-   for (let elm of document.getElementsByClassName("image_gallery")) {
-		galleryList.push(new ImgGallery(elm))
-	}
+   //for (let elm of document.getElementsByClassName("image_gallery")) {
+//		galleryList.push(new ImgGallery(elm))
+//	}
    for (let elm of document.getElementsByClassName("heightCorrect")) {
 		correctorList.push(new HeightCorrect(elm))
 	}
    for (let elm of document.getElementsByClassName('frame')) frames.push(new Frame(elm))
-
-   initUI()
 
    simSettingsCheckbox = document.getElementById('simSettingsCheckbox')
 	simGui = document.getElementById('simGui')
 	if (!simSettingsCheckbox.checked && simGui.classList.contains('active')) simGui.classList.remove('active')
 	else if (simSettingsCheckbox.checked && !simGui.classList.contains('active')) simGui.classList.add('active')
 
-   navigation = new Navigation("navigation")
+   //navigation = new Navigation("navigation")
+
+  //for (let elm of document.getElementsByTagName('video')) elm.play()
+
+  initUI()
 
    parallax = new Parallax("head_parallax")
 
@@ -37,6 +39,8 @@ window.onload = function () {
    k = new Keyboard(element)
 
    sim = new Simulation()
+
+   //for (let elm of document.getElementsByTagName('video')) elm.play()
 
    resize()
 }
@@ -115,6 +119,27 @@ function createSVG(type, parent) {
 
    return elm
 }
+function createIcon(type, parent) {
+  var elm = createElement('i', parent)
+  elm.className = type
+  return elm
+}
+function round(x, n) {
+  return 10**-n * Math.round(x * 10**n)
+}
+function snakeToCamel(s){
+  return s.replace(/(\-\w)/g, function(m){return m[1].toUpperCase();});
+}
+function fit(elm, parent=elm.parentElement) {
+  if (parent.clientWidth/parent.clientHeight < elm.clientWidth/elm.clientHeight) {
+    elm.style.width = '100%'
+    elm.style.height = 'auto'
+  } else {
+    elm.style.height = '100%'
+    elm.style.width = 'auto'
+  }
+}
+
 function toggleSimSettings(elm) {
 	if (!elm.checked) simGui.classList.remove('active')
 	else simGui.classList.add('active')
@@ -136,8 +161,6 @@ class HeightCorrect {
       this.elm.style.top = this.elmList[0].clientHeight+"px"
    }
 }
-
-
 
 class Simulation {
 	constructor() {

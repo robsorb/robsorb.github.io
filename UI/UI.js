@@ -1,6 +1,20 @@
+UIElms = {}
+UIInitList = []
+UIResizeList = []
+
 function initUI() {
-   for (let elm of document.getElementsByClassName("numInput")) new NumberInput(elm)
-   initZoom()
+  UIInitList.map(f => f())
+	for (let elm of document.getElementsByClassName("numInput")) new NumberInput(elm)
+}
+function UIResize() {
+  UIResizeList.map(f => f())
+}
+function initUIElms(className, obj) {
+  for (let elm of document.getElementsByClassName(className)) {
+    if (UIElms[snakeToCamel(className)] === undefined) UIElms[snakeToCamel(className)] = []
+    UIElms[snakeToCamel(className)].push(new obj(elm))
+  }
+  if (obj.init !== undefined) obj.init()
 }
 
 class Hidable {

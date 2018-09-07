@@ -1,3 +1,8 @@
+* {
+  --link-color: #ff4500;
+  --visited-link-color: #ff7d4d;
+}
+
 html {
 	font-family: Roboto;
 }
@@ -23,15 +28,26 @@ video {
 }
 
 a:link {
-	color: #ff4500;
+  position: relative;
+	color: var(--link-color);
 	text-decoration: none;
 	font-weight: bold;
 }
 a:visited {
-	color: #ff7d4d;
+	--link-color: var(--visited-link-color);
+  color: var(--link-color);
 }
-a:hover {
-
+a:after {
+  content: '';
+  position: absolute;
+  width: 0; height: 0;
+  left: 50%; bottom: 0;
+  border-top: 0.15em solid var(--link-color);
+  transform: translate(-50%, 0);
+  transition: width 0.2s;
+}
+a:hover:after {
+  width: 100%;
 }
 
 .parallax {

@@ -105,8 +105,9 @@ class Vector {
 	cross(v) {
 		return veccross(this, v)
 	}
+  toString() {return '('+this.x+', '+this.y+', '+this.z+')'}
 }
-function Vec(x, y, z=0) {
+function Vec(x=0, y=0, z=0) {
 	return new Vector(x, y, z)
 }
 function Vecp(r, a) {
