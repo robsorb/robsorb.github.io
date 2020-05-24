@@ -22,9 +22,9 @@ class NumberInput {
       this.value = this.default
 
       this.width = parseFloat(this.elm.getAttribute('width')) || 100; this.height = parseFloat(this.elm.getAttribute('height')) || 20
-      this.buttonStyle = this.elm.getAttribute('buttonStyle') || "angle"
+      this.buttonStyle = this.elm.dataset.buttonStyle || "angle"
 
-      this.elm.style.display = 'inline'; this.elm.style.position = 'relative'
+      this.elm.style.display = 'inline'
 
       this.bgSvg = createSVG("svg", this.elm);
       this.bgSvg.style.position = "absolute"; this.bgSvg.style.left = "50%"; this.bgSvg.style.top = "50%"; this.bgSvg.style.transform = "translate(-50%, -50%)";
@@ -33,64 +33,68 @@ class NumberInput {
       this.bgRect = createSVG("rect", this.bgSvg);
       this.bgRect.setAttributeNS(null, 'style', "fill:white; stroke: lightgray; stroke-width:1; opacity:1")
       this.bgRect.setAttributeNS(null, 'width', this.width); this.bgRect.setAttributeNS(null, 'height', this.height); this.bgRect.setAttributeNS(null, 'rx', this.height/2); this.bgRect.setAttributeNS(null, 'ry', this.height/2)
+      
 
-      this.div = createElement('div', this.elm)
-      this.div.style.display = "inline-block"; this.div.style.width = this.width + 'px'
 
-      this.input = createElement("input", this.div)
-      this.input.style.width = this.width/2 +'px'; this.input.style.height = this.height+'px'; this.input.style.fontSize = 0.75 * this.height+'px'
-      this.input.style.position = "absolute"; this.input.style.left = "50%"; this.input.style.top = "50%"; this.input.style.transform = "translate(-50%, -50%)"
-      this.input.style.border = "none"; this.input.style.backgroundColor = "transparent"; this.input.style.color = "black"; this.input.style.textAlign = "center";
-      this.input.style.cursor = "pointer"; this.input.style.outline = 'none'
-      this.setValue()
-
-      this.increment = createElement("div", this.elm)
-      this.increment.style.position = "absolute"; this.increment.style.right = this.height/2+'px'; this.increment.style.top = "50%";
-      this.increment.style.width = this.height+'px'; this.increment.style.height = this.height+'px';
-      this.increment.style.color = "black"; this.increment.style.cursor = "pointer";
-      this.incrementLabel = createElement('i', this.increment);
-      this.incrementLabel.style.position = 'absolute'; this.incrementLabel.style.left = '50%'; this.incrementLabel.style.top = '50%'; this.incrementLabel.style.transform = 'translate(-50%, -50%)'
-      this.decrement = createElement("div", this.elm)
-      this.decrement.style.position = "absolute"; this.decrement.style.left = this.height/2+'px'; this.decrement.style.top = "50%";
+      this.decrement = createElement("span", this.elm)
+      // this.decrement.style.backgroundColor = 'pink'
+      this.decrement.style.position = 'relative'
+      this.decrement.style.display = 'inline-block'
+      this.decrement.style.verticalAlign = 'middle'
       this.decrement.style.width = this.height+'px'; this.decrement.style.height = this.height+'px';
       this.decrement.style.color = "black";
       this.decrement.style.cursor = "pointer";
       this.decrementLabel = createElement('i', this.decrement);
       this.decrementLabel.style.position = 'absolute'; this.decrementLabel.style.left = '50%'; this.decrementLabel.style.top = '50%'; this.decrementLabel.style.transform = 'translate(-50%, -50%)'
+      
+
+      this.div = createElement('span', this.elm)
+      this.div.style.position = "relative"
+      this.div.style.zIndex = "10"
+      this.input = createElement("input", this.div)
+      this.input.style.width = this.width/2 +'px'; this.input.style.height = this.height+'px'; this.input.style.fontSize = 0.75 * this.height+'px'
+      this.input.style.border = "none"; this.input.style.backgroundColor = "transparent"; this.input.style.color = "black"; this.input.style.textAlign = "center";
+      this.input.style.cursor = "pointer"; this.input.style.outline = 'none'
+      this.setValue()
+
+      this.increment = createElement("span", this.elm)
+      this.increment.style.display = 'inline-block'
+      this.increment.style.verticalAlign = 'middle'
+      // this.increment.style.backgroundColor = 'pink'
+      this.increment.style.position = "relative";
+      this.increment.style.width = this.height+'px'; this.increment.style.height = this.height+'px';
+      this.increment.style.color = "black"; this.increment.style.cursor = "pointer";
+      this.incrementLabel = createElement('i', this.increment);
+      this.incrementLabel.style.position = 'absolute'; this.incrementLabel.style.left = '50%'; this.incrementLabel.style.top = '50%'; this.incrementLabel.style.transform = 'translate(-50%, -50%)'
+      
       if (this.buttonStyle == "plusMinus") {
          this.increment.style.fontSize = this.height * 0.6 + 'px';
-         this.increment.style.transform = "translate(40%, -50%)"
+         this.incrementLabel.style.transform = "translate(-50%, -60%)"
          this.incrementLabel.className = "fas fa-plus"
          this.decrement.style.fontSize = this.height * 0.6 + 'px';
-         this.decrement.style.transform = "translate(-40%, -50%)"
+         this.decrementLabel.style.transform = "translate(-50%, -60%)"
          this.decrementLabel.className = "fas fa-minus"
       } else if (this.buttonStyle == "angle") {
          this.increment.style.fontSize = this.height * 0.75 + 'px';
-         this.increment.style.transform = "translate(50%, -50%)"
          this.incrementLabel.className = "fas fa-angle-right"
          this.decrement.style.fontSize = this.height * 0.75 + 'px';
-         this.decrement.style.transform = "translate(-50%, -50%)"
          this.decrementLabel.className = "fas fa-angle-left"
       } else if (this.buttonStyle == "caret") {
          this.increment.style.fontSize = this.height * 0.8 + 'px';
-         this.increment.style.transform = "translate(50%, -50%)"
          this.incrementLabel.className = "fas fa-caret-right"
          this.decrement.style.fontSize = this.height * 0.8 + 'px';
-         this.decrement.style.transform = "translate(-50%, -50%)"
          this.decrementLabel.className = "fas fa-caret-left"
       } else if (this.buttonStyle == "arrow") {
          this.increment.style.fontSize = this.height * 0.6 + 'px';
-         this.increment.style.transform = "translate(40%, -50%)"
+        this.incrementLabel.style.transform = "translate(-50%, -60%)"
          this.incrementLabel.className = "fas fa-arrow-right"
          this.decrement.style.fontSize = this.height * 0.6 + 'px';
-         this.decrement.style.transform = "translate(-40%, -50%)"
+        this.decrementLabel.style.transform = "translate(-50%, -60%)"
          this.decrementLabel.className = "fas fa-arrow-left"
       } else if (this.buttonStyle == "circle") {
          this.increment.style.fontSize = this.height * 0.3 + 'px';
-         this.increment.style.transform = "translate(50%, -50%)"
          this.incrementLabel.className = "fas fa-circle"
          this.decrement.style.fontSize = this.height * 0.3 + 'px';
-         this.decrement.style.transform = "translate(-50%, -50%)"
          this.decrementLabel.className = "fas fa-circle"
       }
 
@@ -109,13 +113,13 @@ class NumberInput {
 
       document.addEventListener("mousedown", function(e){ if (!this.mouseOver) {this.onchange()} }.bind(this), false);
       document.addEventListener("keydown", function(e){ if (e.keyCode == 13 && this.mode == 2) {this.onchange()} }.bind(this), false);
-      // document.addEventListener("keyup", function(e){ if (e.keyCode == 16) { this.shift = false }}.bind(this), false);
+      document.addEventListener("keyup", function(e){ if (e.keyCode == 16) { this.shift = false }}.bind(this), false);
 
       numInputs.push(this)
       if (this.id !== undefined) numInputIds[this.id] = this
    }
    typeMode() {
-      this.input.style.width = this.width - this.height +'px';
+      this.input.style.width = this.width +'px';
       this.input.style.textAlign = "left";
       this.input.style.cursor = "text"
       this.increment.style.display = 'none'; this.decrement.style.display = 'none'
@@ -125,7 +129,7 @@ class NumberInput {
       this.input.style.width = this.width - this.height*2 +'px';
       this.input.style.textAlign = "center";
       this.input.style.cursor = "pointer"
-      this.increment.style.display = 'block'; this.decrement.style.display = 'block'
+      this.increment.style.display = 'inline-block'; this.decrement.style.display = 'inline-block'
       this.mode = 0
       this.input.blur()
    }
