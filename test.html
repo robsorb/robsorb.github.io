@@ -1,0 +1,43 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <script>
+
+    var elm;
+    var y = 0
+
+    window.onload = () => {
+      elm = document.getElementById("1")
+      elm.style.position = "absolute"
+      console.log(elm)
+
+      x()
+    }
+
+    function x() {
+      requestAnimationFrame( () => {
+        elm.style.top = window.scrollY + "px"
+
+        x()
+      })
+    }
+
+    // window.addEventListener('wheel', () => {
+    //   elm.style.top = window.scrollY + "px"
+      
+    // }, {passive: false})
+
+
+  </script>
+</head>
+<body>
+  <img class='parallax-element' id="1" style='width: 102%; left: -1%' data-sensitivity=1   data-offset=0.03 data-fixed src='img/header/header-fg.svg'>
+  
+  <div style='height: 2000px; width: 10px'>
+
+  </div>
+</body>
+</html>

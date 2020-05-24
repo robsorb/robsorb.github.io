@@ -42,6 +42,16 @@ window.onload = function () {
 
    //for (let elm of document.getElementsByTagName('video')) elm.play()
 
+
+  function x() {
+    window.requestAnimationFrame(() => {
+      for (let parallax of parallaxList) {
+          parallax.onscroll()
+        }
+        x()
+    })
+  } 
+
    resize()
 }
 function resize() {
@@ -64,11 +74,11 @@ function resize() {
 
 window.onresize = resize
 
-window.onscroll = function(e) {
-   for (let parallax of parallaxList) {
-      parallax.onscroll(e)
-   }
-}
+// window.onscroll = function(e) {
+//    for (let parallax of parallaxList) {
+//       parallax.onscroll(e)
+//    }
+// }
 
 function floatToPx(float) {
    return parseInt(float) + "px"
