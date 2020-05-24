@@ -3,8 +3,8 @@ window.addEventListener('load', function(e) {
   for (let elm of document.getElementsByClassName('parallax-container')) parallaxList.push(new Parallax(elm))
 });
 window.addEventListener('scroll', function(e) {
-  parallaxList.map(elm => elm.onscroll(e))
-});
+  window.requestAnimationFrame(() => parallaxList.map(elm => elm.onscroll()))
+}, {passive:true});
 class Parallax {
   constructor(elm) {
     this.elm = elm

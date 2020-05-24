@@ -34,23 +34,13 @@ window.onload = function () {
 
    // parallax = new Parallax("head_parallax")
 
-   var element = document.getElementById("simCanvas");
-   mouse = new Mouse(element)
-   k = new Keyboard(element)
+  //  var element = document.getElementById("simCanvas");
+  //  mouse = new Mouse(element)
+  //  k = new Keyboard(element)
 
-   sim = new Simulation()
+  //  sim = new Simulation()
 
    //for (let elm of document.getElementsByTagName('video')) elm.play()
-
-
-  function x() {
-    window.requestAnimationFrame(() => {
-      for (let parallax of parallaxList) {
-          parallax.onscroll()
-        }
-        x()
-    })
-  } 
 
    resize()
 }
